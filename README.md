@@ -10,6 +10,10 @@ https://github.com/greentangerine/ME3000
  
 https://github.com/AndyWhittaker/HYD6000
 
+ AND 
+
+https://github.com/Rural-Electric-Systems/Sofar-Inverter-MODBUS-to-MQTT
+
 Thank you so much for sharing your work and letting us all build on it
 
 # Hardware Setup
@@ -29,6 +33,44 @@ Run the "sofarMQTT.py" script with the following command
 (you may need to install some packages, you can do this with "pip3 install package-name")
   
 Script should be run continually in a "screen" instance it will report data to an MQTT server and accept commands
+
+# Or Create a system service
+sudo nano /etc/systemd/system/sofarmqtt.service
+
+
+[Unit]
+Description=Sofar MQTT Python Service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/sofarMQTT.py
+
+Restart=always
+RestartSec=5
+
+#Logging
+StandardOutput=journal
+StandardError=journal
+
+#Prevent runaway memory usage
+MemoryMax=500M
+
+[Install]
+WantedBy=multi-user.target
+
+# enable service
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable sofarmqtt
+sudo systemctl start sofarmqtt
+
+
+# Check the log
+tail -f /sofar.log
 
 # Collecting Data
 Data is found under the MQTT_TOPIC 
