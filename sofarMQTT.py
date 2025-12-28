@@ -14,10 +14,13 @@ from me3000 import ME3000
 #       https://github.com/greentangerine/ME3000
 #       AND
 #       https://github.com/AndyWhittaker/HYD6000
+#       AND
+#       https://github.com/Rural-Electric-Systems/Sofar-Inverter-MODBUS-to-MQTT
 #       
 #       Thank you so much for sharing your work and letting us all build on it
+# 		@dxwillems updated logging and registor 0 for running state.
 
-# Script should be run continually in a "screen" instance it will report data to an MQTT server and accept commands
+# Script should be run continually in a "screen" instance or as service it will report data to an MQTT server and accept commands
 #   Commands should be sent in the MQTT_TOPIC + "command"
 #   e.g. "sensors/sofar/command"
 #   
@@ -32,25 +35,26 @@ MQTTPort = 1883
 MQTT_USER = "sofar"
 MQTT_PWD = "sofar"
 MQTT_TOPIC = "sensors/sofar/"
+LOG_FILE = "sofar.log"
 
 SLAVE=0x01 # Slave Address of Inverter
 THRESHOLD=99
-SERIAL_PORT="/dev/ttyUSB2" # Check this for your USB device
+SERIAL_PORT="/dev/ttyACM0" # Check this for your USB device
 MIN_CHARGE=20
 MAX_CHARGE=100
 
 # Toptics can be added or removed
 # Topic formats: (<location>, <name>, <h-signed/H-unsigned>, <conversion factor>)
-TOPICS = ((1, 'running_state', 'H', 0.1),
+TOPICS = ((0, 'running_state', 'H', 1),
           (6, 'grid_a_voltage', 'H', 0.1),
 		  (7, 'grid_a_current', 'h', 0.01),
-          #(8, 'grid_b_voltage', 'H', 0.1),
-		  #(9, 'grid_b_current', 'h', 0.01),
-          #(10, 'grid_c_voltage', 'H', 0.1),
-		  #(11, 'grid_c_current', 'h', 0.01),
+          (8, 'grid_b_voltage', 'H', 0.1),
+		  (9, 'grid_b_current', 'h', 0.01),
+          (10, 'grid_c_voltage', 'H', 0.1),
+		  (11, 'grid_c_current', 'h', 0.01),
           (12, 'grid_frequency', 'H', 0.01),
 		  (13, 'batt_power', 'h', 10), 
-		  (14, 'batt_voltage', 'H', 0.1),
+		  (14, 'batt_voltage', 'H', 0.01),
 		  (15, 'batt_current', 'h', 0.01),
 		  (16, 'batt_soc', 'H',1),
 		  (17, 'batt_temp', 'H',1),
@@ -108,7 +112,7 @@ TOPICS = ((1, 'running_state', 'H', 0.1),
 		 )
 
 def on_connect(client, userdata, flags, rc):
-	print("Connected with result code "+str(rc))
+	logger.info("Connected with result code %s", rc)
     # Here we subscribe to the command topic
 	client.subscribe( MQTT_TOPIC + "command")
 
@@ -117,7 +121,7 @@ mqttcommand= ""
 def on_message(client, userdata, msg):
 	global mqttcommand
 	msg.payload = msg.payload.decode("utf-8")
-	print("\n MQTT Command of Topic: "+msg.topic+ " recieved with payload: "+str(msg.payload))
+	logger.info("MQTT Command of Topic: %s received with payload: %s", msg.topic, msg.payload)
 	mqttcommand = str(msg.payload)
 	sleep(1)
 	
@@ -132,7 +136,7 @@ client.connect(MQTTServer,MQTTPort,30)
 client.loop_start()
 
 def signal_handler(signal,frame):
-	print("Cleaning Up then Shutting Down")
+	logger.info("Cleaning up then shutting down")
 	client.loop_stop()
 	sys.exit(1)
 
@@ -142,53 +146,88 @@ mqttcounts=0
 serErrorCount = 0
 inverter = ME3000(SERIAL_PORT, SLAVE)
 
+# Configure rotating log (1 GB max)
+logger = logging.getLogger("sofar_mqtt")
+logger.setLevel(logging.INFO)
+
+file_handler = logging.handlers.RotatingFileHandler(
+    LOG_FILE, maxBytes=1024 * 1024 * 1024, backupCount=1
+)
+console_handler = logging.StreamHandler()
+
+formatter = logging.Formatter(
+    "%(asctime)s %(levelname)s %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+)
+file_handler.setFormatter(formatter)
+console_handler.setFormatter(formatter)
+
+if not logger.handlers:
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
 while serErrorCount != 11:
     try:
-        print("Read Data "+ str(mqttcounts))
+        logger.info("Read Data %s", mqttcounts)
         status, me3000_response = inverter.read_holding()
         if status != True:
-            print("Read failed")
+            logger.warning("Read failed")
             
         mqttcounts = mqttcounts +1
         serErrorCount = 0
-        print(me3000_response)
+        logger.info("Inverter response: %s", me3000_response)
     except:
         serErrorCount = serErrorCount + 1
         wait = serErrorCount * 10
-        print("Unable to read Data From Inverter, wait " + str(wait) +"s for retry. Error count: " + str( serErrorCount))
+        logger.exception(
+            "Unable to read Data From Inverter, wait %ss for retry. Error count: %s",
+            wait,
+            serErrorCount,
+        )
         sleep(10)
     
     if serErrorCount == 0:
         try:
-            print("Publish to MQTT "+ str(mqttcounts))
-            for topic in TOPICS:
-                t_value = me3000_response[topic[0]]
-                if topic[2] == 'h': # using struct.pack format
-                    t_value = numpy.int16(t_value) # convert to signed
-                t_value = int(t_value) # ensure int - need this for some reason
-                t_converted = t_value * topic[3] # Multiply by conversion factor in topic
-                t_topic = MQTT_TOPIC + topic[1] # build topic name
-                ret = client.publish(t_topic, t_converted)
-                if ret[0] != 0:
-                    print("Publish failed for" + t_topic)
-        except:
-            print("\n Error Occured in MQTT Publish")
+            logger.info("Publish to MQTT %s", mqttcounts)
+            for location, name, fmt, factor in TOPICS:
+                try:
+                    raw_value = me3000_response[location]
+                    if fmt == 'h': # using struct.pack format
+                        raw_value = int(raw_value)
+                        if raw_value >= 0x8000: # convert unsigned 16-bit to signed
+                            raw_value -= 0x10000
+                    t_converted = int(raw_value) * factor # Multiply by conversion factor in topic
+                    t_topic = MQTT_TOPIC + name # build topic name
+                    ret = client.publish(t_topic, t_converted)
+                    if ret[0] != 0:
+                        logger.warning(
+                            "Publish failed rc=%s topic=%s value=%s",
+                            ret[0],
+                            t_topic,
+                            t_converted,
+                        )
+                except Exception as e:
+                    logger.exception(
+                        "Error publishing %s at register %s", name, location
+                    )
+                    break
+        except Exception as e:
+            logger.exception("Error occurred in MQTT Publish loop")
 
     if mqttcommand != "":
         mqttcommand = mqttcommand.split(", ")
         if mqttcommand[0] == "AUTO":
-            print("set to Auto Mode")
+            logger.info("Set to Auto Mode")
             status, me3000_response = inverter.set_auto()  
         elif mqttcommand[0] == "CHARGE":
-            print("set to Charge Mode")
+            logger.info("Set to Charge Mode")
             power = int(mqttcommand[1])
             status, me3000_response = inverter.set_charge( power )
         elif mqttcommand[0] == "DISCHARGE":
-            print("set to Discharge Mode")
+            logger.info("Set to Discharge Mode")
             power = int(mqttcommand[1])
             status, me3000_response = inverter.set_discharge( power )
         elif mqttcommand[0] == "STANDBY":
-            print("set to Standby Mode")
+            logger.info("Set to Standby Mode")
             status, me3000_response = inverter.set_standby()
         else:
             print("\n MQTT Command not recognised")
