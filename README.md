@@ -64,8 +64,11 @@ WantedBy=multi-user.target
 
 # enable service
 sudo systemctl daemon-reexec
+
 sudo systemctl daemon-reload
+
 sudo systemctl enable sofarmqtt
+
 sudo systemctl start sofarmqtt
 
 
