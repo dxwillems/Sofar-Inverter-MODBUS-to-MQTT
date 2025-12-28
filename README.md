@@ -39,27 +39,39 @@ sudo nano /etc/systemd/system/sofarmqtt.service
 
 
 [Unit]
+
 Description=Sofar MQTT Python Service
+
 After=network-online.target
+
 Wants=network-online.target
 
 [Service]
+
 Type=simple
+
 User=pi
+
 WorkingDirectory=/home/pi
+
 ExecStart=/usr/bin/python3 /home/pi/sofarMQTT.py
 
 Restart=always
+
 RestartSec=5
 
 #Logging
+
 StandardOutput=journal
+
 StandardError=journal
 
 #Prevent runaway memory usage
+
 MemoryMax=500M
 
 [Install]
+
 WantedBy=multi-user.target
 
 # enable service
