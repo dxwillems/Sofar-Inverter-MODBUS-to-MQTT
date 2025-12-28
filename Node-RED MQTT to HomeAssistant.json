@@ -2,207 +2,9 @@
     {
         "id": "c2fe5fd5.3f8b1",
         "type": "tab",
-        "label": "SolarMAN",
+        "label": "SOFAR",
         "disabled": false,
         "info": ""
-    },
-    {
-        "id": "d2562d2b.ab13",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "ESS Battery",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "ESS Battery"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "%"
-            }
-        ],
-        "state": "payload.payload",
-        "stateType": "msg",
-        "attributes": [
-            {
-                "property": "voltage",
-                "value": "voltage",
-                "valueType": "msg"
-            },
-            {
-                "property": "current",
-                "value": "current",
-                "valueType": "msg"
-            },
-            {
-                "property": "dc_power",
-                "value": "dc_power",
-                "valueType": "msg"
-            }
-        ],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 1130,
-        "y": 140,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "501611ea.a5337",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "PV Generation",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "Solar Generation"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "W"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 840,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2c9316ba.f09dca",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "Grid Power",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "Grid Power"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "W"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [
-            {
-                "property": "Home Consumption",
-                "value": "home",
-                "valueType": "msg"
-            }
-        ],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 830,
-        "y": 320,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1d1192b8.ab21dd",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "PV Daily Statistics",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "PV Daily Statistics"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "kWh"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 870,
-        "y": 1000,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "3be53bdb.3cc874",
@@ -212,12 +14,16 @@
         "topic": "sensors/sofar/pv_generation_power",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 180,
         "y": 260,
         "wires": [
             [
-                "501611ea.a5337"
+                "c64f67e0c8867788",
+                "459596eaf723d2b4"
             ]
         ]
     },
@@ -229,12 +35,17 @@
         "topic": "sensors/sofar/batt_soc",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 220,
         "y": 80,
         "wires": [
             [
-                "864cfd7f.4304"
+                "864cfd7f.4304",
+                "26caee5fbd28b364",
+                "6b8b45f8d86028de"
             ]
         ]
     },
@@ -246,7 +57,10 @@
         "topic": "sensors/sofar/grid_power",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 210,
         "y": 320,
         "wires": [
@@ -263,12 +77,15 @@
         "topic": "sensors/sofar/day_pv_generated",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "88f1e0e0f8360467",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 150,
         "y": 1000,
         "wires": [
             [
-                "1d1192b8.ab21dd"
+                "7f139b4241fc418a"
             ]
         ]
     },
@@ -280,12 +97,15 @@
         "topic": "sensors/sofar/home_load_power",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 190,
         "y": 380,
         "wires": [
             [
-                "26809848.6cdca8"
+                "2d67f4f548fca1c9"
             ]
         ]
     },
@@ -312,96 +132,8 @@
         "y": 320,
         "wires": [
             [
-                "2c9316ba.f09dca"
+                "0ceba6ace6733572"
             ]
-        ]
-    },
-    {
-        "id": "26809848.6cdca8",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "Home Consumption",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "Home Consumption"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "W"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 860,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1b59ec58.b74254",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "ESS Battery Power",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "ESS Battery Power"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "W"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 850,
-        "y": 440,
-        "wires": [
-            []
         ]
     },
     {
@@ -412,13 +144,17 @@
         "topic": "sensors/sofar/batt_power",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 210,
         "y": 440,
         "wires": [
             [
-                "1b59ec58.b74254",
-                "f597913.83f207"
+                "f597913.83f207",
+                "4932cb2fde9edb98",
+                "7310515f51d30e03"
             ]
         ]
     },
@@ -434,6 +170,7 @@
         "key": "topic",
         "joiner": "\\n",
         "joinerType": "str",
+        "useparts": true,
         "accumulate": true,
         "timeout": "",
         "count": "3",
@@ -459,7 +196,10 @@
         "topic": "sensors/sofar/batt_voltage",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 210,
         "y": 140,
         "wires": [
@@ -476,7 +216,10 @@
         "topic": "sensors/sofar/batt_current",
         "qos": "0",
         "datatype": "auto",
-        "broker": "2fc552e6.9dbd7e",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
         "x": 210,
         "y": 200,
         "wires": [
@@ -570,8 +313,11 @@
         "y": 140,
         "wires": [
             [
-                "d2562d2b.ab13",
-                "47d185fc.d2245c"
+                "47d185fc.d2245c",
+                "808a828399c43f44",
+                "925ee10be7a18565",
+                "231933a9ff4b6067",
+                "b45c5197c65710e1"
             ]
         ]
     },
@@ -583,7 +329,12 @@
         "topic": "sensors/sofar/command",
         "qos": "",
         "retain": "",
-        "broker": "2fc552e6.9dbd7e",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b13f7ce51b926f4c",
         "x": 1220,
         "y": 520,
         "wires": []
@@ -748,61 +499,6 @@
         ]
     },
     {
-        "id": "e9e96d21.6502b",
-        "type": "ha-entity",
-        "z": "c2fe5fd5.3f8b1",
-        "name": "ESS Efficiency",
-        "server": "83728f1a.43d75",
-        "version": 1,
-        "debugenabled": false,
-        "outputs": 1,
-        "entityType": "sensor",
-        "config": [
-            {
-                "property": "name",
-                "value": "ESS Efficiency"
-            },
-            {
-                "property": "device_class",
-                "value": ""
-            },
-            {
-                "property": "icon",
-                "value": ""
-            },
-            {
-                "property": "unit_of_measurement",
-                "value": "%"
-            }
-        ],
-        "state": "payload",
-        "stateType": "msg",
-        "attributes": [
-            {
-                "property": "ess_charge",
-                "value": "charge_eff",
-                "valueType": "msg"
-            },
-            {
-                "property": "ess_discharge",
-                "value": "discharge_eff",
-                "valueType": "msg"
-            }
-        ],
-        "resend": true,
-        "outputLocation": "",
-        "outputLocationType": "none",
-        "inputOverride": "allow",
-        "outputOnStateChange": false,
-        "outputPayload": "$entity().state ? \"on\": \"off\"",
-        "outputPayloadType": "jsonata",
-        "x": 1120,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "47d185fc.d2245c",
         "type": "join",
         "z": "c2fe5fd5.3f8b1",
@@ -862,16 +558,18 @@
         "type": "function",
         "z": "c2fe5fd5.3f8b1",
         "name": "",
-        "func": "msg.charge_eff = Number(msg.dc_power) / Number(msg.ac_power)\nmsg.discharge_eff = Number(msg.ac_power) / Number(msg.dc_power)\n\nif(msg.discharge_eff >= msg.charge_eff)\n{\n    msg.payload = msg.charge_eff\n} else\n{\n    msg.payload = msg.discharge_eff\n}\nreturn msg;",
+        "func": "msg.charge_eff = Number(msg.dc_power) / Number(msg.ac_power)\nmsg.discharge_eff = Number(msg.ac_power) / Number(msg.dc_power)\n\nif(msg.discharge_eff >= msg.charge_eff)\n{\n    msg.payload = msg.charge_eff\n} else\n{\n    msg.payload = msg.discharge_eff\n}\n\nmsg.payload = msg.payload * 100;\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
+        "libs": [],
         "x": 880,
         "y": 200,
         "wires": [
             [
-                "e9e96d21.6502b"
+                "d9e1680c2decd856"
             ]
         ]
     },
@@ -1164,7 +862,7 @@
         "y": 540,
         "wires": [
             [
-                "676c7ae4.a883f4"
+                "58d93ed9.58315"
             ]
         ]
     },
@@ -1172,7 +870,7 @@
         "id": "b186c34d.dd211",
         "type": "inject",
         "z": "c2fe5fd5.3f8b1",
-        "name": "OctopusGo - 07:10",
+        "name": "OctopusGo - 06:00",
         "props": [
             {
                 "p": "payload"
@@ -1183,7 +881,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "10 07 * * *",
+        "crontab": "00 06 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -1201,6 +899,7 @@
         "id": "52c9a58c.10e9cc",
         "type": "inject",
         "z": "c2fe5fd5.3f8b1",
+        "d": true,
         "name": "OctopusGo - 04:30",
         "props": [
             {
@@ -1221,9 +920,7 @@
         "x": 140,
         "y": 580,
         "wires": [
-            [
-                "45d0686.3427f98"
-            ]
+            []
         ]
     },
     {
@@ -1321,10 +1018,1621 @@
         ]
     },
     {
+        "id": "4932cb2fde9edb98",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "ESS Battery Power",
+        "entityConfig": "1b59ec58.b74254",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 850,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7f139b4241fc418a",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "PV Daily Statistics",
+        "entityConfig": "1d1192b8.ab21dd",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 870,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "808a828399c43f44",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "ESS Battery",
+        "entityConfig": "d2562d2b.ab13",
+        "version": 0,
+        "state": "payload.payload",
+        "stateType": "msg",
+        "attributes": [
+            {
+                "property": "voltage",
+                "value": "voltage",
+                "valueType": "msg"
+            },
+            {
+                "property": "current",
+                "value": "current",
+                "valueType": "msg"
+            },
+            {
+                "property": "dc_power",
+                "value": "dc_power",
+                "valueType": "msg"
+            }
+        ],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 1130,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c64f67e0c8867788",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "PV Generation",
+        "entityConfig": "501611ea.a5337",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 840,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0ceba6ace6733572",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Grid Power",
+        "entityConfig": "2c9316ba.f09dca",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [
+            {
+                "property": "Home Consumption",
+                "value": "home",
+                "valueType": "msg"
+            }
+        ],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 830,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d67f4f548fca1c9",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Home Consumption",
+        "entityConfig": "26809848.6cdca8",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 860,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9e1680c2decd856",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "ESS Efficiency",
+        "entityConfig": "e9e96d21.6502b",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [
+            {
+                "property": "ess_charge",
+                "value": "charge_eff",
+                "valueType": "msg"
+            },
+            {
+                "property": "ess_discharge",
+                "value": "discharge_eff",
+                "valueType": "msg"
+            }
+        ],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 1120,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "459596eaf723d2b4",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1020,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "7310515f51d30e03",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 19",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "231933a9ff4b6067",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "sofarpy_batt_curr",
+        "entityConfig": "0aa1d5e75469a525",
+        "version": 0,
+        "state": "current",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 1370,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b45c5197c65710e1",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "sofarpy_voltage",
+        "entityConfig": "fa2591d510378477",
+        "version": 0,
+        "state": "voltage",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 1360,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "925ee10be7a18565",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "batt_capacity",
+        "entityConfig": "21535ac7c0859013",
+        "version": 0,
+        "state": "payload.payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 1320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c5ec800ef338fee1",
+        "type": "ha-button",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "PSofarAuto",
+        "version": 0,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityConfig": "70dd4383d0fc423f",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 130,
+        "y": 740,
+        "wires": [
+            [
+                "45d0686.3427f98"
+            ]
+        ]
+    },
+    {
+        "id": "11d4870fa2f059f6",
+        "type": "ha-button",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "PSofarStandby",
+        "version": 0,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityConfig": "55c6e0b5b4a94f64",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 140,
+        "y": 700,
+        "wires": [
+            [
+                "34ecde46.c42072"
+            ]
+        ]
+    },
+    {
+        "id": "5b99a084926f3aca",
+        "type": "ha-button",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "PSofarCharge1000",
+        "version": 0,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityConfig": "cf7581f5b80c6e9a",
+        "outputProperties": [
+            {
+                "property": "payload",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entityState"
+            },
+            {
+                "property": "topic",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "triggerId"
+            },
+            {
+                "property": "data",
+                "propertyType": "msg",
+                "value": "",
+                "valueType": "entity"
+            }
+        ],
+        "x": 150,
+        "y": 660,
+        "wires": [
+            [
+                "58d93ed9.58315"
+            ]
+        ]
+    },
+    {
+        "id": "26caee5fbd28b364",
+        "type": "function",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "SOC>90 Once a day at night",
+        "func": "/*************************************************\n * CONFIG\n *************************************************/\nconst DEBUG = false;\n// DEBUG = true  -> ignore time + once-per-day lock (for testing)\n// DEBUG = false -> normal operation\n\nconst SOC_THRESHOLD = 90;\n\n/*************************************************\n * INPUT VALIDATION\n *************************************************/\nlet soc = Number(msg.payload);\nif (isNaN(soc)) return null;\n\nlet now = new Date();\n\n/*************************************************\n * TIME WINDOW CHECK (00:01–06:00)\n *************************************************/\nlet minutesNow = now.getHours() * 60 + now.getMinutes();\nlet startMin = 1;          // 00:01\nlet endMin = 6 * 60;     // 06:00\n\nlet inTimeWindow = (minutesNow >= startMin && minutesNow <= endMin);\n\n/*************************************************\n * DAILY LOCK\n *************************************************/\nlet today = now.toISOString().slice(0, 10);\nlet lastDay = context.get(\"lastDay\");\n\n/*************************************************\n * DEBUG OVERRIDES\n *************************************************/\nif (DEBUG) {\n    inTimeWindow = true;\n    lastDay = null; // allow multiple triggers per day\n}\n\n/*************************************************\n * MAIN LOGIC\n *************************************************/\nif (soc > SOC_THRESHOLD && lastDay !== today && inTimeWindow) {\n    context.set(\"lastDay\", today);\n    return msg; // ✅ PASS\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1620,
+        "y": 360,
+        "wires": [
+            [
+                "1da68a2397791d51",
+                "eee1988b715895b0"
+            ]
+        ]
+    },
+    {
+        "id": "666b3f7cc234631e",
+        "type": "inject",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "91",
+        "payloadType": "num",
+        "x": 1350,
+        "y": 300,
+        "wires": [
+            [
+                "26caee5fbd28b364"
+            ]
+        ]
+    },
+    {
+        "id": "809874e65bf0b782",
+        "type": "inject",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "80",
+        "payloadType": "num",
+        "x": 1330,
+        "y": 360,
+        "wires": [
+            [
+                "26caee5fbd28b364"
+            ]
+        ]
+    },
+    {
+        "id": "1da68a2397791d51",
+        "type": "function",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Standby Mode",
+        "func": "msg.payload = \"STANDBY, 0\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1340,
+        "y": 440,
+        "wires": [
+            [
+                "f9e45c0b37585568",
+                "1e359d58.842393"
+            ]
+        ]
+    },
+    {
+        "id": "eee1988b715895b0",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "f9e45c0b37585568",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1480,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "eecb6e297965d0a1",
+        "type": "pushover",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "device": "",
+        "title": "SofarUpdate",
+        "priority": 0,
+        "sound": "",
+        "url": "",
+        "url_title": "",
+        "html": false,
+        "x": 1530,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "5f04f65e64a66398",
+        "type": "template",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "SofarInverterstatus: {{payload}} ",
+        "output": "str",
+        "x": 1360,
+        "y": 1280,
+        "wires": [
+            [
+                "eecb6e297965d0a1",
+                "a19c93e50dd21a65"
+            ]
+        ]
+    },
+    {
+        "id": "db83aa8c2d5a390a",
+        "type": "switch",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "old_sofar_state",
+                "vt": "global"
+            },
+            {
+                "t": "neq",
+                "v": "old_sofar_state",
+                "vt": "global"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1110,
+        "y": 1360,
+        "wires": [
+            [
+                "51981d469cfa2183"
+            ],
+            [
+                "5f04f65e64a66398"
+            ]
+        ]
+    },
+    {
+        "id": "66aac5f65c975897",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "old_sofar_state",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 1420,
+        "wires": [
+            [
+                "71c43e157e9cf0ef"
+            ]
+        ]
+    },
+    {
+        "id": "51981d469cfa2183",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "71c43e157e9cf0ef",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "a19c93e50dd21a65",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1520,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "6ed604a99b57af12",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "daab1fbf0cf78827",
+        "type": "mqtt in",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "topic": "sensors/sofar/running_state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b13f7ce51b926f4c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 1120,
+        "wires": [
+            [
+                "4956bbe86d8cacd0",
+                "6ed604a99b57af12"
+            ]
+        ]
+    },
+    {
+        "id": "99fcfef46ee59228",
+        "type": "ha-sensor",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "inverter_state",
+        "entityConfig": "9ccd593832238939",
+        "version": 0,
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "inputOverride": "allow",
+        "outputProperties": [],
+        "x": 880,
+        "y": 1300,
+        "wires": [
+            [
+                "db83aa8c2d5a390a",
+                "66aac5f65c975897"
+            ]
+        ]
+    },
+    {
+        "id": "8ecf3829b64e633b",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Check",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Check",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 1160,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "4956bbe86d8cacd0",
+        "type": "switch",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "3",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "4",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "5",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "6",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "7",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 9,
+        "x": 190,
+        "y": 1280,
+        "wires": [
+            [
+                "8ecf3829b64e633b"
+            ],
+            [
+                "3498a7059d7c8e5e"
+            ],
+            [
+                "2de22b1ba8c9e7ec"
+            ],
+            [
+                "096e9865dbc75eb1"
+            ],
+            [
+                "68c2618d42733c70"
+            ],
+            [
+                "2c5ed3a9653a6389"
+            ],
+            [
+                "ba6d8829d8d97939"
+            ],
+            [
+                "b0dd37bd27a5eaaf"
+            ],
+            [
+                "b9496b22f918d0fc"
+            ]
+        ]
+    },
+    {
+        "id": "b9496b22f918d0fc",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Unknown",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Unknown",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1480,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "3498a7059d7c8e5e",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Charge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Charge",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1200,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "096e9865dbc75eb1",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Discharge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Discharge",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1280,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "2de22b1ba8c9e7ec",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Check Discharge",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Check Discharge",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 1240,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "68c2618d42733c70",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "EPS",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "EPS",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 1320,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "2c5ed3a9653a6389",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Fault (temporary)",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Fault (temporary)",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 1360,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "ba6d8829d8d97939",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Fault permanent",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Fault (permanent",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 1400,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "b0dd37bd27a5eaaf",
+        "type": "change",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "Standby",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Standby",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 1440,
+        "wires": [
+            [
+                "99fcfef46ee59228"
+            ]
+        ]
+    },
+    {
+        "id": "6b8b45f8d86028de",
+        "type": "debug",
+        "z": "c2fe5fd5.3f8b1",
+        "name": "debug 26",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b13f7ce51b926f4c",
+        "type": "mqtt-broker",
+        "name": "sofarpi4",
+        "broker": "192.168.0.31",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "88f1e0e0f8360467",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.31",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1b59ec58.b74254",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for ESS Battery Power",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "ESS Battery Power"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "1d1192b8.ab21dd",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for PV Daily Statistics",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "PV Daily Statistics"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "kWh"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "d2562d2b.ab13",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for ESS Battery",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "ESS Battery"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "%"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "501611ea.a5337",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for PV Generation",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Solar Generation"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "2c9316ba.f09dca",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for Grid Power",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Grid Power"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "26809848.6cdca8",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for Home Consumption",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "Home Consumption"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "W"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "e9e96d21.6502b",
+        "type": "ha-entity-config",
+        "server": "83728f1a.43d75",
+        "deviceConfig": "",
+        "name": "sensor config for ESS Efficiency",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "ESS Efficiency"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "%"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            },
+            {
+                "property": "last_reset",
+                "value": ""
+            }
+        ],
+        "resend": true
+    },
+    {
+        "id": "0aa1d5e75469a525",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "sofarpy_batt_curr",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "sofarpy_batt_curr"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "current"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "A"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "fa2591d510378477",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "sofarpy_voltage",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "sofarpy_voltage"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "voltage"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "V"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "21535ac7c0859013",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "batt_capacity",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "batt_capacity"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": "battery"
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": "%"
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "70dd4383d0fc423f",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "PSofarAuto",
+        "version": 6,
+        "entityType": "button",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "PSofarAuto"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "55c6e0b5b4a94f64",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "PSofarStandby",
+        "version": 6,
+        "entityType": "button",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "PSofarStandby"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "cf7581f5b80c6e9a",
+        "type": "ha-entity-config",
+        "server": "6b1110b5.183a4",
+        "deviceConfig": "e97f24acb8277a79",
+        "name": "PSofarCharge1000",
+        "version": 6,
+        "entityType": "button",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "PSofarCharge1000"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
+        "id": "9ccd593832238939",
+        "type": "ha-entity-config",
+        "server": "85986bfc.e8e808",
+        "deviceConfig": "e0e8da5c4a44453c",
+        "name": "inverter_state",
+        "version": 6,
+        "entityType": "sensor",
+        "haConfig": [
+            {
+                "property": "name",
+                "value": "inverter_state"
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "entity_picture",
+                "value": ""
+            },
+            {
+                "property": "entity_category",
+                "value": ""
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            },
+            {
+                "property": "state_class",
+                "value": ""
+            }
+        ],
+        "resend": false,
+        "debugEnabled": false
+    },
+    {
         "id": "83728f1a.43d75",
         "type": "server",
         "name": "Home Assistant",
-        "legacy": false,
         "addon": true,
         "rejectUnauthorizedCerts": true,
         "ha_boolean": "y|yes|true|on|home|open",
@@ -1332,24 +2640,67 @@
         "cacheJson": true
     },
     {
-        "id": "2fc552e6.9dbd7e",
-        "type": "mqtt-broker",
-        "name": "Moss",
-        "broker": "192.168.86.46",
-        "port": "1883",
-        "clientid": "",
-        "usetls": false,
-        "compatmode": false,
-        "keepalive": "60",
-        "cleansession": true,
-        "birthTopic": "",
-        "birthQos": "0",
-        "birthPayload": "",
-        "closeTopic": "",
-        "closeQos": "0",
-        "closePayload": "",
-        "willTopic": "",
-        "willQos": "0",
-        "willPayload": ""
+        "id": "6b1110b5.183a4",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
+    },
+    {
+        "id": "e97f24acb8277a79",
+        "type": "ha-device-config",
+        "name": "sofarpy",
+        "hwVersion": "",
+        "manufacturer": "Node-RED",
+        "model": "",
+        "swVersion": ""
+    },
+    {
+        "id": "85986bfc.e8e808",
+        "type": "server",
+        "name": "Home Assistant",
+        "version": 5,
+        "addon": true,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true,
+        "heartbeat": false,
+        "heartbeatInterval": 30,
+        "areaSelector": "friendlyName",
+        "deviceSelector": "friendlyName",
+        "entitySelector": "friendlyName",
+        "statusSeparator": "at: ",
+        "statusYear": "hidden",
+        "statusMonth": "short",
+        "statusDay": "numeric",
+        "statusHourCycle": "h23",
+        "statusTimeFormat": "h:m",
+        "enableGlobalContextStore": true
+    },
+    {
+        "id": "e0e8da5c4a44453c",
+        "type": "ha-device-config",
+        "name": "SofarESP32",
+        "hwVersion": "",
+        "manufacturer": "Node-RED",
+        "model": "Sofar ME3000SP",
+        "swVersion": ""
     }
 ]
